@@ -4,10 +4,12 @@ from objects.customer import Counter
 
 
 def get_data_from_excel():
-    # Processing the first document
-    book1 = load_workbook(filename="Book2.xlsx")
-    sheet = book1['Sheet1']
+    file_excel_1 = "Book2.xlsx"
+    file_excel_2 = "Book1.xlsx"
     customer_list = []
+    # Processing the first document
+    book1 = load_workbook(filename=file_excel_1)
+    sheet = book1['Sheet1']
     varee_id = ''
     for index in range(2, 56):
         varee_id = sheet['C' + str(index)].value
@@ -32,7 +34,7 @@ def get_data_from_excel():
         # *** ***
 
     # Processing the second document
-    book2 = load_workbook(filename="Book1.xlsx")
+    book2 = load_workbook(filename=file_excel_2)
     sheet2 = book2['Sheet1']
     for i in range(0, len(customer_list)):
         for index in range(1, 56):
@@ -57,10 +59,11 @@ def get_data_from_excel():
         for counter in customer.get_counters:
             print(f" - id: {counter.id}, number: {counter.number} | obis_code: {counter.obis_code} | obis_code_short_name: {counter.obis_code_short_name} | min_value: {counter.min_value} | max_value: {counter.max_value} | last_value: {counter.last_value}")
     # *** ***
+    return customer_list
 
 
 def main():
-    get_data_from_excel()
+    customer_list = get_data_from_excel()
 
 
 if __name__ == "__main__":
